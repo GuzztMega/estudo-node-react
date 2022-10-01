@@ -4,7 +4,8 @@ class TaskController {
 
   async create(req, res){
     const task = new TaskModel(req.body);
-    await task.save()
+    await task
+          .save()
           .then(response => {
             return res.status(200).json(response);
           })
