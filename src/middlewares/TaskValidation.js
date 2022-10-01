@@ -19,18 +19,24 @@ const TaskValidation = async (req, res, next) => {
     return res.status(400).json({ error: 'Escolha uma data futura'});
   else{
     let task;
-    
-    task = await TaskModel.findOne({ 
-        'when': {'$eq': new Date(when)},
-        'macaddress': {'$in': macaddress}
-       });
+
+    if(req.params.id){
+      task = await TaskModel.findOne({ 
+        '_id': {'$ne': req.params.id },
+        'when': {'$eq': new Date(when) },
+        'macaddress': {'$in': macaddress }
+      });
+    }else{
+      task = await TaskModel.findOne({ 
+        'when': {'$eq': new Date(when) },
+        'macaddress': {'$in': macaddress }
+      });
+    }
     
     if(task)
       return res.status(400).json({ error: 'Já existe uma tarefa cadastrada neste dia e hora'});   
     next();
   }  
-
-
 }
 
 module.exports = TaskValidation;
