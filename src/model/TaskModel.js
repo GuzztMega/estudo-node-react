@@ -7,6 +7,7 @@ const TaskSchema = new Schema({
   title: {type: String, required: true},
   description: {type: String, required: true},
   when: {type: Date, default: true},
+  done: {type: Boolean, default: false},
   created: {type: Date, default: Date.now()}
 })
 
