@@ -5,11 +5,12 @@ server.use(express.json());
 
 const TaskRoutes = require('./routes/TaskRoutes');
 
-server.get('/teste', (req,res) =>{
-  res.send("Ta na teste, mano");
-});
-
 server.use('/task', TaskRoutes);
+
 server.listen(3000, () => {
   console.log("Executando...");
+});
+
+server.get('/teste', (req,res) =>{
+  res.send(">> testing... ");
 });
