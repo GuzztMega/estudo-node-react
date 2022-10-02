@@ -7,6 +7,8 @@ const MacaddressValidation = require('../middlewares/MacaddressValidation');
 
 router.get('/:id', TaskController.get)
 router.get('/filter/all', MacaddressValidation, TaskController.getAll)
+router.get('/filter/late', MacaddressValidation, TaskController.late)
+router.get('/filter/today', MacaddressValidation, TaskController.today)
 
 router.put('/:id', TaskValidation, TaskController.update);
 router.put('/:id/:done', TaskController.done);
