@@ -26,7 +26,7 @@ class TaskController {
   }
 
   async getAll(req, res){
-    await TaskModel.find({ macaddress: {'$in': req.body.macaddress}})
+    await TaskModel.find({ macaddress: {'$in': req.params.macaddress}})
       .sort('when')
       .then(response => {
         return res.status(200).json(response);
@@ -75,7 +75,7 @@ class TaskController {
 
   async late(req, res){
     await TaskModel.find({
-          'macaddress': { '$in': req.body.macaddress },
+          'macaddress': { '$in': req.params.macaddress },
           'when': { '$lt': currentDate }
         })
       .sort('when')
@@ -89,7 +89,7 @@ class TaskController {
 
   async today(req, res){
     await TaskModel.find({
-      'macaddress': { '$in': req.body.macaddress },
+      'macaddress': { '$in': req.params.macaddress },
       'when': {'$gte': startOfDay(currentDate), '$lte': endOfDay(currentDate)}
     })
     .sort('when')
@@ -103,7 +103,7 @@ class TaskController {
 
   async week(req, res){
     await TaskModel.find({
-      'macaddress': { '$in': req.body.macaddress },
+      'macaddress': { '$in': req.params.macaddress },
       'when': {'$gte': startOfWeek(currentDate), '$lte': endOfWeek(currentDate)}
     })
     .sort('when')
@@ -117,7 +117,7 @@ class TaskController {
 
   async month(req, res){
     await TaskModel.find({
-      'macaddress': { '$in': req.body.macaddress },
+      'macaddress': { '$in': req.params.macaddress },
       'when': {'$gte': startOfMonth(currentDate), '$lte': endOfMonth(currentDate)}
     })
     .sort('when')
@@ -131,7 +131,7 @@ class TaskController {
 
   async year(req, res){
     await TaskModel.find({
-      'macaddress': { '$in': req.body.macaddress },
+      'macaddress': { '$in': req.params.macaddress },
       'when': {'$gte': startOfYear(currentDate), '$lte': endOfYear(currentDate)}
     })
     .sort('when')
